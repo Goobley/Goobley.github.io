@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Thyr</title>
+  <meta name="description" content="">
+  <meta name="author" content="Chris Osborne (2087801)">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/serifNew.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<style type="text/css">
+#percentageSize {
+  width: 100%;
+  height: 100%;
+}
+<style type="text/css">
+#fullSlide {
+  height: 90%;
+}
+</style>
+
+<p><section style="text-align: left;"></p>
+
+<h1>Thyr</h1>
+
+<h4>Simulating Microwave Emission from Solar Flares</h4>
+
+<p><br></p>
+
+<h4>Chris Osborne (2087801)</h4>
+
+<p></section></p>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Project Aims</h3>
+  <ul class = "build incremental">
+<li><p>Increased reolution simulation of microwave (MW) emission from flares, in particular the foot regions.</p>
+
+<ul>
+<li>Not resolvable by modern radio astronomy equipment.</li>
+<li>Produce an initial idea of what we may see.</li>
+</ul></li>
+<li><p>Focus on gyrosynchrotron (GS) emission.</p>
+
+<ul>
+<li>First analytically described by Ramaty in 1969.</li>
+<li>Mildly relativistic electrons (\(\gamma \sim 5\)) spiralling through a magenetic field.</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>GS Simulation</h3>
+  <ul class = "build incremental">
+<li>Computer simulation of GS Emission is not a new idea.
+
+<ul>
+<li>First program produced by Ramaty in an early FORTRAN.</li>
+<li>We can directly trace our lineage back to that program.</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Computer Simulation</h3>
+  <ul class = "build incremental">
+<li>Why now?
+
+<ul>
+<li>Modern computers are many orders of magnitude more powerful than when Ramaty wrote his original
+simulation.</li>
+<li>Can afford to be &quot;profligate&quot; with computational resources (within reason)</li>
+<li>The simulation of \(j\) and \(k\) is typically less than 50ms per frequency - on this laptop!</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Design: Start with the Desired Output...</h3>
+  <p><img style="max-height:70%" src="noFeet.png"></p>
+
+<p>An emission map plotted in <code>MATLAB</code>.</p>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Design: ...And with Prior Art</h3>
+  <p><img style="max-height:90%" src="Gyro3D.png"></p>
+
+<p>Output from PJAS&#39; <code>gyro3d</code> (IDL)</p>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Interface</h3>
+  <p><img style="max-height:90%" src="Interface.png"></p>
+
+</section>
+<section class='' data-state='' id='slide-8'>
+  <h2>Two columns?</h2>
+  <p>Pls?</p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <ul class = "build incremental">
+<li>Arghhsdfsd</li>
+<li>asdfadfs</li>
+<li>asdf</li>
+</ul>
+
+<p>fdfddf</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <!-- ![Stuff](../../noFeet.png) -->
+
+<p><img id="percentageSize" src="../../noFeet.png" alt="stuff"></p>
+
+<p>This <strong>thing</strong> shows a <em>thing</em></p>
+
+</div>
+</section>
+<section class='' data-state='' id='slide-9'>
+  <h3>A bit of maths?</h3>
+  <p>\(
+\begin{equation}
+\int_a^{b+1} x^{2x+3}dx = \text{something}
+\label{eq:test}
+\tag{eq1}
+\end{equation}
+\)</p>
+
+<p>Look at equation \eqref{eq:test}; it&#39;s pretty messed up!</p>
+
+<p><img id="percentageSize" src="../../noFeet.png" alt="stuff"></p>
+
+<script>
+$('ol.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
+$('ul.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
+</script>
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'serifNew', 
+    transition: Reveal.getQueryHash().transition || 'fade', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
