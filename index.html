@@ -26,52 +26,34 @@
 #fullImg {
     height: auto;
     width: auto;
-    max-width: 55vw;
-    max-height: 55vh;
+    max-width: 60vw;
+    max-height: 60vh;
 }
 </style>
 
-</section>
-<section class='class' data-state='' id='id'>
-  
-  <!-- <style type="text/css"> -->
+<style type="text/css">
+#captionedImg {
+    height: auto;
+    width: auto;
+    max-width: 50vw;
+    max-height: 50vh;
+}
+</style>
 
-<!-- .percentageSize { -->
-
-<!--   width: 100%; -->
-
-<!--   height: 100%; -->
-
-<!-- } -->
-
-<!-- </style> -->
-
-<!-- <style type="text/css"> -->
-
-<!-- .fullSlide { -->
-
-<!--   height: 40%; -->
-
-<!--   width: 40%; -->
-
-<!-- } -->
-
-<!-- </style> -->
-
-<!-- <section style="text-align: left;"> -->
+<p><section style="text-align: left;"></p>
 
 <h1>Thyr</h1>
 
 <h4>Simulating Microwave Emission from Solar Flares</h4>
 
-<p><br></p>
+<p><br/></p>
 
 <h4>Chris Osborne (2087801)</h4>
 
-<!-- </section> -->
+<p></section></p>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-2'>
   <h3>Project Aims</h3>
   <ul class = "build incremental">
 <li><p>Increased reolution simulation of microwave (MW) emission from flares, in particular the foot regions.</p>
@@ -89,7 +71,7 @@
 </ul>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-3'>
   <h3>GS Simulation</h3>
   <ul class = "build incremental">
 <li>Computer simulation of GS Emission is not a new idea.
@@ -101,7 +83,7 @@
 </ul>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-4'>
   <h3>Computer Simulation</h3>
   <ul class = "build incremental">
 <li>Why now?
@@ -115,21 +97,21 @@ simulation.</li>
 </ul>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-5'>
   <h3>Design: Start with the Desired Output...</h3>
   <p><img id="fullImg" src="noFeet.png" /></p>
 
 <p>An emission map plotted in <code>MATLAB</code>.</p>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-6'>
   <h3>Design: ...And with Prior Art</h3>
   <p><img id="fullImg" src="Gyro3D.png" /></p>
 
 <p>Output from PJAS&#39; <code>gyro3d</code> (IDL)</p>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-7'>
   <h3>Main Methods</h3>
   <ul class = "build incremental">
 <li><p>GS Simulation as per PJAS&#39; modified version of Ramaty&#39;s code, given a quick optimisation pass</p></li>
@@ -142,24 +124,16 @@ simulation.</li>
 </ul></li>
 </ul>
 
-<!-- <img id="fullSlide" src="rep.png"> -->
-
-<!-- <div id="fullSlide"> -->
-
-<!-- <img src="rep.png"> -->
-
-<!-- </div> -->
-
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-8'>
   <h3>Our Loop Model</h3>
-  <p><img id="fullImg" src="rep.png" /></p>
+  <p><img id="captionedImg" src="rep.png" /></p>
 
 <p>Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
 shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-9'>
   <h3>Programming Model</h3>
   <ul class = "build incremental">
 <li><p>Extensible Modern C++ Core</p></li>
@@ -173,7 +147,7 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
 </ul>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-10'>
   <h4>Example</h4>
   <pre><code class="lua">function ArcToCMSun(h)
    -- DegToRad / &quot;perDeg * AstroUnit
@@ -242,12 +216,12 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 </code></pre>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-11'>
   <h3>Interface</h3>
   <p><img id="fullImg" src="Interface.png" /></p>
 
 </section>
-<section class='class' data-state='' id='id'>
+<section class='' data-state='' id='slide-12'>
   <h3>Interface</h3>
   <ul class = "build incremental">
 <li>Previous slide showed interactive interface.</li>
@@ -255,11 +229,33 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 </ul>
 
 </section>
-<section class='class' data-state='' id='id'>
-  <h2>Demonstration</h2>
+<section class='' data-state='' id='slide-13'>
+  <h1>Demonstration</h1>
   
 </section>
+<section class='' data-state='' id='slide-14'>
+  
+  <p>Current data production method
+IDL may be used for emission maps, but not required anywhere now</p>
+
+</section>
 <section class='' data-state='' id='slide-15'>
+  <h3>Current Failings</h3>
+  <ul>
+<li>Raycasting against large number of domains
+
+<ul>
+<li>Currently \(O(N^3)\), could be \(O(N\log(N))\) (I think) using octree.</li>
+<li>Time to implement (&lt; 7 days).</li>
+<li>Look at Ogre3D/Urho3D/my Lethani for source inspiration.
+<br/></li>
+<li>Alternative: Replace current domain system with something like BSP</li>
+<li>Time to implement $\sim$1 month. See Quake/Unreal Engine source.</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-16'>
   <h2>Two columns?</h2>
   <p>Pls?</p>
 
@@ -282,7 +278,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 
 </div>
 </section>
-<section class='' data-state='' id='slide-16'>
+<section class='' data-state='' id='slide-17'>
   <h3>A bit of maths?</h3>
   <p>\(
 \begin{equation}

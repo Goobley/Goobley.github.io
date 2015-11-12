@@ -17,36 +17,28 @@ knit        : slidify::knit2slides
 #fullImg {
     height: auto;
     width: auto;
-    max-width: 55vw;
-    max-height: 55vh;
+    max-width: 60vw;
+    max-height: 60vh;
 }
 </style>
 
---- .class #id
+<style type="text/css">
+#captionedImg {
+    height: auto;
+    width: auto;
+    max-width: 50vw;
+    max-height: 50vh;
+}
+</style>
 
-<!-- <style type="text/css"> -->
-<!-- .percentageSize { -->
-<!--   width: 100%; -->
-<!--   height: 100%; -->
-<!-- } -->
-<!-- </style> -->
-
-
-<!-- <style type="text/css"> -->
-<!-- .fullSlide { -->
-<!--   height: 40%; -->
-<!--   width: 40%; -->
-<!-- } -->
-<!-- </style> -->
-
-<!-- <section style="text-align: left;"> -->
+<section style="text-align: left;">
 # Thyr
 #### Simulating Microwave Emission from Solar Flares
-<br>
+<br/>
 #### Chris Osborne (2087801)
-<!-- </section> -->
+</section>
 
---- .class #id
+---
 ### Project Aims
 
 > - Increased reolution simulation of microwave (MW) emission from flares, in particular the foot regions.
@@ -57,14 +49,14 @@ knit        : slidify::knit2slides
 >      - First analytically described by Ramaty in 1969.
 >      - Mildly relativistic electrons ($\gamma \sim 5$) spiralling through a magenetic field.
 
---- .class #id
+---
 ### GS Simulation
 
 > - Computer simulation of GS Emission is not a new idea.
 >      - First program produced by Ramaty in an early FORTRAN.
 >      - We can directly trace our lineage back to that program.
 
---- .class #id
+---
 ### Computer Simulation
 
 > - Why now?
@@ -73,21 +65,21 @@ knit        : slidify::knit2slides
 >     - Can afford to be "profligate" with computational resources (within reason)
 >     - The simulation of $j$ and $k$ is typically less than 50ms per frequency - on this laptop!
 
---- .class #id
+---
 ### Design: Start with the Desired Output...
 
 <img id="fullImg" src="noFeet.png" />
 
 An emission map plotted in `MATLAB`.
 
---- .class #id
+---
 ### Design: ...And with Prior Art
 
 <img id="fullImg" src="Gyro3D.png" />
 
 Output from PJAS' `gyro3d` (IDL)
 
---- .class #id
+---
 ### Main Methods
 
 > - GS Simulation as per PJAS' modified version of Ramaty's code, given a quick optimisation pass
@@ -98,24 +90,15 @@ Output from PJAS' `gyro3d` (IDL)
 >     - This proved harder than expected, provided highly adjustable loop instead.
 >     - How adjustable?
 
-<!-- <img id="fullSlide" src="rep.png"> -->
-<!-- <div id="fullSlide"> -->
-<!-- <img src="rep.png"> -->
-<!-- </div> -->
-
---- .class #id
+---
 ### Our Loop Model
 
-
-<img id="fullImg" src="rep.png" />
+<img id="captionedImg" src="rep.png" />
 
 Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
 shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
 
-
-
-
---- .class #id
+---
 ### Programming Model
 
 > - Extensible Modern C++ Core
@@ -127,7 +110,7 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
 >
 > - Extensive documentation and examples for the front-end (See users manual). API reference provided for the core.
 
---- .class #id
+---
 #### Example
 
 ```lua
@@ -197,20 +180,43 @@ RT.GUpdate()
 RT.SaveAllCSVs('flare1')
 ```
 
---- .class #id
+---
 ### Interface
 
 <img id="fullImg" src="Interface.png" />
 
---- .class #id
+---
 ### Interface
 
 > - Previous slide showed interactive interface.
 > - Can also be run with pre-written scripts.
 
---- .class #id
+---
+# Demonstration
 
-## Demonstration
+---
+
+Current data production method
+IDL may be used for emission maps, but not required anywhere now
+
+
+---
+### Current Failings
+
+- Raycasting against large number of domains
+    - Currently $O(N^3)$, could be $O(N\log(N))$ using octree culling.
+    - Time to implement < 7 days.
+    - Look at Ogre3D/Urho3D/my Lethani for source inspiration.
+    - Alternative: Replace current domain system with something like BSP
+    - Time to implement $\sim$1 month. See Quake/Unreal Engine source.
+
+---
+### Current Failings
+
+- Only single power law electron distribution available in Lua.
+    - The back-end is already in place, we just need a way to link the two.
+    - Time to implement < 3 days.
+
 
 --- &twocol
 ## Two columns?
