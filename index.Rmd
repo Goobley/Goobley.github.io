@@ -41,7 +41,7 @@ knit        : slidify::knit2slides
 ---
 ### Project Aims
 
-> - Increased reolution simulation of microwave (MW) emission from flares, in particular the foot regions.
+> - Increased resolution simulation of microwave (MW) emission from flares, in particular the foot regions.
 >      - Not resolvable by modern radio astronomy equipment.
 >      - Produce an initial idea of what we may see.
 >
@@ -101,7 +101,7 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
 ---
 ### Programming Model
 
-> - Extensible Modern C++ Core
+> - Extensible modular modern `C++` core
 >
 > - Interpreted Turing-complete Lua scripting front-end.
 >     - Acceptable speed - within factor of 5 of `C` for double precision maths.
@@ -109,6 +109,35 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
 > - Unless modifying the software beyond its design role, most users should never have need to touch the C++.
 >
 > - Extensive documentation and examples for the front-end (See users manual). API reference provided for the core.
+
+---
+
+<section style="text-align: left;">
+Currently the emission maps are created using a `MATLAB` script (available in the user's manual),
+but these are also easily creatable with free software such as `gnuplot`, using the following
+script:
+
+```gnuplot
+set terminal pdf color
+set datafile separator ","
+set output "Colormap.pdf"
+set key off
+set xrange [0:800]
+set yrange [0:800]
+set title "Brightness Temperature (K) of ordinary mode of Flare at 1GHz"
+plot "th.1.000000GHz.O.csv" matrix with image
+```
+
+This can easily be meta-programmed using `bash`, `python`, `perl` etc. to automatically fill in the
+graph titles from the filenames, much as the `MATLAB` script does.
+
+`IDL` also works well for this task, as does `R` for more in-depth statistical processing.
+</section>
+
+---
+#### Sample Gnuplot output
+
+<img id="fullImg" src="Colormap.png" />
 
 ---
 #### Example
@@ -194,69 +223,128 @@ RT.SaveAllCSVs('flare1')
 ---
 # Demonstration
 
----
-
-Current data production method
-IDL may be used for emission maps, but not required anywhere now
 
 
 ---
 ### Current Failings
 
 - Raycasting against large number of domains
-    - Currently $O(N^3)$, could be $O(N\log(N))$ using octree culling.
-    - Time to implement < 7 days.
+    - Currently $O(N^3)$, could be $O(N\log(N))$ using octree sorting.
+    - Time to implement: < 7 days.
     - Look at Ogre3D/Urho3D/my Lethani for source inspiration.
-    - Alternative: Replace current domain system with something like BSP
+
+- Alternative: Replace current domain system with something like BSP
     - Time to implement $\sim$1 month. See Quake/Unreal Engine source.
 
 ---
 ### Current Failings
 
 - Only single power law electron distribution available in Lua.
-    - The back-end is already in place, we just need a way to link the two.
-    - Time to implement < 3 days.
-
-
---- &twocol
-## Two columns?
-
-Pls?
-
-*** =left
-
-> - Arghhsdfsd
-> - asdfadfs
-> - asdf
-
-fdfddf
-
-*** =right
-
-<!-- ![Stuff](../../noFeet.png) -->
-
-<img id="fullImg" src="../../noFeet.png" alt="stuff" />
-
-This **thing** shows a *thing*
+    - The back-end is already in place for multi-power law, we just need a way to link the two.
+    - Time to implement: < 3 days.
 
 ---
 
-### A bit of maths?
+<section style="text-align: left;">
+### Current Failings - A comment
 
 
-\(
-\begin{equation}
-\int_a^{b+1} x^{2x+3}dx = \text{something}
-\label{eq:test}
-\tag{eq1}
-\end{equation}
-\)
+The most time-consuming part of the GS simulation is the Bessel function calculations. These are
+responsible for peaks in the emission spectrum, however it may be a good idea to use an
+interpolation scheme depending on the precision that is actually required.
 
-Look at equation \eqref{eq:test}; it's pretty messed up!
+Investigation required.
 
-<img id="fullImg" src="../../noFeet.png" alt="stuff" />
+</section>
 
+---
+### Possible Future Extensions
+
+- Other geometry types
+    - The algorithms used are applicable to any shape - if it can't be parametrised directly, then we
+    can use polygons.
+    - Time to implement: $\sim$2 weeks. See raytracers (e.g. POVRay).
+
+- Other frequency ranges
+    - If $j$ and $k$ can be calculated for the cloud/plasma, we can use it.
+    - Should be a fairly minor modification < 10 days to add a second frequency range (e.g. EUV),
+    faster from there.
+
+The above would require slight modifications of currently hard-coded constants if non-solar bodies
+were to be analysed.
+
+---
+### Possible Future Extensions
+
+- Allowing the user to define different functions per flare in the multi-loop case.
+    - Time to implement: < 4 days
+
+---
+### Possible Future Extensions
+
+- Modern raytracing techniques (raymarching)
+    - These techniques could massively increase the resolution and complexity of shapes while improving
+    speed and decreasing memory usage (GPGPU).
+    - Time to implement: Probably at least 2 months.
+
+---
+#### Raymarching
+
+<img id="captionedImg" src="fruxis.jpg" />
+
+Made by [Íñgo Quílez](http://www.iquilezles.org/prods/index.htm), using a 4KB binary, no external
+files, renders on a 4 year old GPU in near real time.
+
+---
+### Interesting developments
+
+- A more in-depth survey of the possible variations of parameters that could lead to heavy GS
+emission from the flare foot points (and estimating its magnitude)
+- Presumably a combination of high density with increased temperature relative to the chromosphere.
+
+---
+### Interesting developments
+
+- Reanalysing the situation set up in (Simões & Costa 2006) using a multi-loop model with more
+  accurate chromospheric and coronal temperature and density models. Hopefully allowing a direct
+  comparision to NoRH and RHESSI data, thus confirming the validity of the models.
+
+---
+<section style="text-align: left;">
+### Acknowledgements
+
+I would like to thank Dr. Simões (my advisor), and the University of Glasgow Astronomy department
+for supporting me and funding this project. I also wish to thank all the coders whose previous work
+has been invaluable.
+
+##### Please also see the user's manual and my summer report.
+</section>
+
+---
+### Questions?
+<br/>
+<br/>
+##### [Chris Osborne](mailto:2087801o@student.gla.ac.uk)
+
+<!-- --- &twocol -->
+<!-- ## Two columns? -->
+
+<!-- Pls? -->
+
+<!-- *** =left -->
+
+<!-- > - Arghhsdfsd -->
+<!-- > - asdfadfs -->
+<!-- > - asdf -->
+
+<!-- *** =right -->
+
+<!-- <img id="fullImg" src="../../noFeet.png" alt="stuff" /> -->
+
+<!-- This **thing** shows a *thing* -->
+
+<!-- Incremental list fixes (go with jquery at top) -->
 <script>
-$('ol.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
-$('ul.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
+$('ol.incremental li').addClass('fragment')
+$('ul.incremental li').addClass('fragment')
 </script>

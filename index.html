@@ -56,7 +56,7 @@
 <section class='' data-state='' id='slide-2'>
   <h3>Project Aims</h3>
   <ul class = "build incremental">
-<li><p>Increased reolution simulation of microwave (MW) emission from flares, in particular the foot regions.</p>
+<li><p>Increased resolution simulation of microwave (MW) emission from flares, in particular the foot regions.</p>
 
 <ul>
 <li>Not resolvable by modern radio astronomy equipment.</li>
@@ -136,7 +136,7 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
 <section class='' data-state='' id='slide-9'>
   <h3>Programming Model</h3>
   <ul class = "build incremental">
-<li><p>Extensible Modern C++ Core</p></li>
+<li><p>Extensible modular modern <code>C++</code> core</p></li>
 <li><p>Interpreted Turing-complete Lua scripting front-end.</p>
 
 <ul>
@@ -148,6 +148,35 @@ shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
 
 </section>
 <section class='' data-state='' id='slide-10'>
+  
+  <p><section style="text-align: left;">
+Currently the emission maps are created using a <code>MATLAB</code> script (available in the user&#39;s manual),
+but these are also easily creatable with free software such as <code>gnuplot</code>, using the following
+script:</p>
+
+<pre><code class="gnuplot">set terminal pdf color
+set datafile separator &quot;,&quot;
+set output &quot;Colormap.pdf&quot;
+set key off
+set xrange [0:800]
+set yrange [0:800]
+set title &quot;Brightness Temperature (K) of ordinary mode of Flare at 1GHz&quot;
+plot &quot;th.1.000000GHz.O.csv&quot; matrix with image
+</code></pre>
+
+<p>This can easily be meta-programmed using <code>bash</code>, <code>python</code>, <code>perl</code> etc. to automatically fill in the
+graph titles from the filenames, much as the <code>MATLAB</code> script does.</p>
+
+<p><code>IDL</code> also works well for this task, as does <code>R</code> for more in-depth statistical processing.
+</section></p>
+
+</section>
+<section class='' data-state='' id='slide-11'>
+  <h4>Sample Gnuplot output</h4>
+  <p><img id="fullImg" src="Colormap.png" /></p>
+
+</section>
+<section class='' data-state='' id='slide-12'>
   <h4>Example</h4>
   <pre><code class="lua">function ArcToCMSun(h)
    -- DegToRad / &quot;perDeg * AstroUnit
@@ -216,12 +245,12 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 </code></pre>
 
 </section>
-<section class='' data-state='' id='slide-11'>
+<section class='' data-state='' id='slide-13'>
   <h3>Interface</h3>
   <p><img id="fullImg" src="Interface.png" /></p>
 
 </section>
-<section class='' data-state='' id='slide-12'>
+<section class='' data-state='' id='slide-14'>
   <h3>Interface</h3>
   <ul class = "build incremental">
 <li>Previous slide showed interactive interface.</li>
@@ -229,72 +258,175 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 </ul>
 
 </section>
-<section class='' data-state='' id='slide-13'>
+<section class='' data-state='' id='slide-15'>
   <h1>Demonstration</h1>
   
 </section>
-<section class='' data-state='' id='slide-14'>
-  
-  <p>Current data production method
-IDL may be used for emission maps, but not required anywhere now</p>
-
-</section>
-<section class='' data-state='' id='slide-15'>
+<section class='' data-state='' id='slide-16'>
   <h3>Current Failings</h3>
   <ul>
-<li>Raycasting against large number of domains
+<li><p>Raycasting against large number of domains</p>
 
 <ul>
-<li>Currently \(O(N^3)\), could be \(O(N\log(N))\) (I think) using octree.</li>
-<li>Time to implement (&lt; 7 days).</li>
-<li>Look at Ogre3D/Urho3D/my Lethani for source inspiration.
-<br/></li>
-<li>Alternative: Replace current domain system with something like BSP</li>
+<li>Currently \(O(N^3)\), could be \(O(N\log(N))\) using octree sorting.</li>
+<li>Time to implement: &lt; 7 days.</li>
+<li>Look at Ogre3D/Urho3D/my Lethani for source inspiration.</li>
+</ul></li>
+<li><p>Alternative: Replace current domain system with something like BSP</p>
+
+<ul>
 <li>Time to implement $\sim$1 month. See Quake/Unreal Engine source.</li>
 </ul></li>
 </ul>
 
 </section>
-<section class='' data-state='' id='slide-16'>
-  <h2>Two columns?</h2>
-  <p>Pls?</p>
+<section class='' data-state='' id='slide-17'>
+  <h3>Current Failings</h3>
+  <ul>
+<li>Only single power law electron distribution available in Lua.
 
-<div style='float:left;width:48%;' class='centered'>
-  <ul class = "build incremental">
-<li>Arghhsdfsd</li>
-<li>asdfadfs</li>
-<li>asdf</li>
+<ul>
+<li>The back-end is already in place for multi-power law, we just need a way to link the two.</li>
+<li>Time to implement: &lt; 3 days.</li>
+</ul></li>
 </ul>
 
-<p>fdfddf</p>
-
-</div>
-<div style='float:right;width:48%;'>
-  <!-- ![Stuff](../../noFeet.png) -->
-
-<p><img id="fullImg" src="../../noFeet.png" alt="stuff" /></p>
-
-<p>This <strong>thing</strong> shows a <em>thing</em></p>
-
-</div>
 </section>
-<section class='' data-state='' id='slide-17'>
-  <h3>A bit of maths?</h3>
-  <p>\(
-\begin{equation}
-\int_a^{b+1} x^{2x+3}dx = \text{something}
-\label{eq:test}
-\tag{eq1}
-\end{equation}
-\)</p>
+<section class='' data-state='' id='slide-18'>
+  
+  <p><section style="text-align: left;"></p>
 
-<p>Look at equation \eqref{eq:test}; it&#39;s pretty messed up!</p>
+<h3>Current Failings - A comment</h3>
 
-<p><img id="fullImg" src="../../noFeet.png" alt="stuff" /></p>
+<p>The most time-consuming part of the GS simulation is the Bessel function calculations. These are
+responsible for peaks in the emission spectrum, however it may be a good idea to use an
+interpolation scheme depending on the precision that is actually required.</p>
+
+<p>Investigation required.</p>
+
+<p></section></p>
+
+</section>
+<section class='' data-state='' id='slide-19'>
+  <h3>Possible Future Extensions</h3>
+  <ul>
+<li><p>Other geometry types</p>
+
+<ul>
+<li>The algorithms used are applicable to any shape - if it can&#39;t be parametrised directly, then we
+can use polygons.</li>
+<li>Time to implement: $\sim$2 weeks. See raytracers (e.g. POVRay).</li>
+</ul></li>
+<li><p>Other frequency ranges</p>
+
+<ul>
+<li>If \(j\) and \(k\) can be calculated for the cloud/plasma, we can use it.</li>
+<li>Should be a fairly minor modification &lt; 10 days to add a second frequency range (e.g. EUV),
+faster from there.</li>
+</ul></li>
+</ul>
+
+<p>The above would require slight modifications of currently hard-coded constants if non-solar bodies
+were to be analysed.</p>
+
+</section>
+<section class='' data-state='' id='slide-20'>
+  <h3>Possible Future Extensions</h3>
+  <ul>
+<li>Allowing the user to define different functions per flare in the multi-loop case.
+
+<ul>
+<li>Time to implement: &lt; 4 days</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-21'>
+  <h3>Possible Future Extensions</h3>
+  <ul>
+<li>Modern raytracing techniques (raymarching)
+
+<ul>
+<li>These techniques could massively increase the resolution and complexity of shapes while improving
+speed and decreasing memory usage (GPGPU).</li>
+<li>Time to implement: Probably at least 2 months.</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-22'>
+  <h4>Raymarching</h4>
+  <p><img id="captionedImg" src="fruxis.jpg" /></p>
+
+<p>Made by <a href="http://www.iquilezles.org/prods/index.htm">Íñgo Quílez</a>, using a 4KB binary, no external
+files, renders on a 4 year old GPU in near real time.</p>
+
+</section>
+<section class='' data-state='' id='slide-23'>
+  <h3>Interesting developments</h3>
+  <ul>
+<li>A more in-depth survey of the possible variations of parameters that could lead to heavy GS
+emission from the flare foot points (and estimating its magnitude)</li>
+<li>Presumably a combination of high density with increased temperature relative to the chromosphere.</li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-24'>
+  <h3>Interesting developments</h3>
+  <ul>
+<li>Reanalysing the situation set up in (Simões &amp; Costa 2006) using a multi-loop model with more
+accurate chromospheric and coronal temperature and density models. Hopefully allowing a direct
+comparision to NoRH and RHESSI data, thus confirming the validity of the models.</li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-25'>
+  
+  <p><section style="text-align: left;"></p>
+
+<h3>Acknowledgements</h3>
+
+<p>I would like to thank Dr. Simões (my advisor), and the University of Glasgow Astronomy department
+for supporting me and funding this project. I also wish to thank all the coders whose previous work
+has been invaluable.</p>
+
+<h5>Please also see the user&#39;s manual and my summer report.</h5>
+
+<p></section></p>
+
+</section>
+<section class='' data-state='' id='slide-26'>
+  <h3>Questions?</h3>
+  <p><br/>
+<br/></p>
+
+<h5><a href="mailto:2087801o@student.gla.ac.uk">Chris Osborne</a></h5>
+
+<!-- --- &twocol -->
+
+<!-- ## Two columns? -->
+
+<!-- Pls? -->
+
+<!-- *** =left -->
+
+<!-- > - Arghhsdfsd -->
+
+<!-- > - asdfadfs -->
+
+<!-- > - asdf -->
+
+<!-- *** =right -->
+
+<!-- <img id="fullImg" src="../../noFeet.png" alt="stuff" /> -->
+
+<!-- This **thing** shows a *thing* -->
+
+<!-- Incremental list fixes (go with jquery at top) -->
 
 <script>
-$('ol.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
-$('ul.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
+$('ol.incremental li').addClass('fragment')
+$('ul.incremental li').addClass('fragment')
 </script>
 
 </section>
