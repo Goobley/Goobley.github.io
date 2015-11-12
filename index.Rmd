@@ -17,8 +17,8 @@ knit        : slidify::knit2slides
 #fullImg {
     height: auto;
     width: auto;
-    max-width: 60%;
-    max-height: 60%;
+    max-width: 55vw;
+    max-height: 55vh;
 }
 </style>
 
