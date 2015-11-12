@@ -20,6 +20,10 @@
     <div class="slides">
       <section class='' data-state='' id='slide-1'>
   
+  
+</section>
+<section class='class' data-state='' id='id'>
+  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <style type="text/css">
@@ -33,7 +37,7 @@
 }
 </style>
 
-<p><section style="text-align: left;"></p>
+<!-- <section style="text-align: left;"> -->
 
 <h1>Thyr</h1>
 
@@ -43,7 +47,7 @@
 
 <h4>Chris Osborne (2087801)</h4>
 
-<p></section></p>
+<!-- </section> -->
 
 </section>
 <section class='class' data-state='' id='id'>
@@ -105,11 +109,128 @@ simulation.</li>
 
 </section>
 <section class='class' data-state='' id='id'>
+  <h3>Main Methods</h3>
+  <ul class = "build incremental">
+<li><p>GS Simulation as per PJAS&#39; modified version of Ramaty&#39;s code, given a quick optimisation pass</p></li>
+<li><p>Volumetric Raytracing</p></li>
+<li><p>Original aim was to provide arbitrary flare geometry</p>
+
+<ul>
+<li>This proved harder than expected, provided highly adjustable loop instead.</li>
+<li>How adjustable?</li>
+</ul></li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Our Loop Model</h3>
+  <p><img style="max-height:60%" src="rep.png"></p>
+
+<p>Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
+shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h3>Programming Model</h3>
+  <ul class = "build incremental">
+<li><p>Extensible Modern C++ Core</p></li>
+<li><p>Interpreted Turing-complete Lua scripting front-end.</p>
+
+<ul>
+<li>Acceptable speed - within factor of 5 of <code>C</code> for double precision maths.</li>
+</ul></li>
+<li><p>Unless modifying the software beyond its design role, most users should never have need to touch the C++.</p></li>
+<li><p>Extensive documentation and examples for the front-end (See users manual). API reference provided for the core.</p></li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h4>Example</h4>
+  <pre><code class="lua">function ArcToCMSun(h)
+   -- DegToRad / &quot;perDeg * AstroUnit
+   return math.pi / 180.0 / 3600.0 * 1.49597870e13 * h
+end
+
+function CMSunToArc(h)
+   return h / (math.pi / 180.0 / 3600.0 * 1.49597870e13)
+end
+
+densityScaleHeight = CMSunToArc(130e5);
+kappa = 10
+loopDensity = 10e9
+photDensity = 1.16e17
+
+function BMagnitude(s)
+   if (math.abs(s) &gt; highResRadialPos) then
+      return 600 + ((20 * math.abs(s) - highResRadialPos)
+            / (1- highResRadialPos))^2
+   else
+      return 200 + ((20 * math.abs(s))
+            / highResRadialPos)^2
+   end
+end
+
+function PlasmaDensity(h)
+   if (h &lt; highResHeight) then -- roughly based on Battaglia et al. ApJ 752
+      local nExp = loopDensity + photDensity * math.exp(-h / densityScaleHeight)
+      local nk = photDensity * (1 + h / (kappa * densityScaleHeight))^(-kappa + 1)
+      return nExp + nk
+   else
+      return 1.0e9
+   end
+end
+
+function Temperature(h)
+   if (h &lt; highResHeight) then
+      return 5000 + 5000 * (h / highResHeight)
+   else
+      return 2.0e7
+   end
+end
+
+function NonThermalDensity(s)
+   return 1.0e6
+end
+
+function Delta(s)
+   return 4.0
+end
+
+function EnergyMinMax(s)
+   return 10, 5000
+end
+
+RT.SetViewportSize(25,25)
+RT.AddLoop(&#39;l1&#39;)
+l1.SetSolarSize(8, 2, 0.2)
+l1.SetSolarLoc(0, 60, 40, 70)
+l1.SetHighRes(2, 2)
+l1.SetDomains(20)
+RT.CullDomains()
+RT.LoadFreqList(&#39;logFreqs.csv&#39;)
+RT.GUpdate()
+RT.SaveAllCSVs(&#39;flare1&#39;)
+</code></pre>
+
+</section>
+<section class='class' data-state='' id='id'>
   <h3>Interface</h3>
   <p><img style="max-height:90%" src="Interface.png"></p>
 
 </section>
-<section class='' data-state='' id='slide-8'>
+<section class='class' data-state='' id='id'>
+  <h3>Interface</h3>
+  <ul class = "build incremental">
+<li>Previous slide showed interactive interface.</li>
+<li>Can also be run with pre-written scripts.</li>
+</ul>
+
+</section>
+<section class='class' data-state='' id='id'>
+  <h2>Demonstration</h2>
+  
+</section>
+<section class='' data-state='' id='slide-15'>
   <h2>Two columns?</h2>
   <p>Pls?</p>
 
@@ -132,7 +253,7 @@ simulation.</li>
 
 </div>
 </section>
-<section class='' data-state='' id='slide-9'>
+<section class='' data-state='' id='slide-16'>
   <h3>A bit of maths?</h3>
   <p>\(
 \begin{equation}

@@ -11,6 +11,9 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
+
+--- .class #id
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <style type="text/css">
 #percentageSize {
@@ -23,12 +26,12 @@ knit        : slidify::knit2slides
 }
 </style>
 
-<section style="text-align: left;">
+<!-- <section style="text-align: left;"> -->
 # Thyr
 #### Simulating Microwave Emission from Solar Flares
 <br>
 #### Chris Osborne (2087801)
-</section>
+<!-- </section> -->
 
 --- .class #id
 ### Project Aims
@@ -58,7 +61,6 @@ knit        : slidify::knit2slides
 >     - The simulation of $j$ and $k$ is typically less than 50ms per frequency - on this laptop!
 
 --- .class #id
-
 ### Design: Start with the Desired Output...
 
 <img style="max-height:70%" src="noFeet.png">
@@ -66,7 +68,6 @@ knit        : slidify::knit2slides
 An emission map plotted in `MATLAB`.
 
 --- .class #id
-
 ### Design: ...And with Prior Art
 
 <img style="max-height:90%" src="Gyro3D.png">
@@ -74,10 +75,120 @@ An emission map plotted in `MATLAB`.
 Output from PJAS' `gyro3d` (IDL)
 
 --- .class #id
+### Main Methods
+
+> - GS Simulation as per PJAS' modified version of Ramaty's code, given a quick optimisation pass
+>
+> - Volumetric Raytracing
+>
+> - Original aim was to provide arbitrary flare geometry
+>     - This proved harder than expected, provided highly adjustable loop instead.
+>     - How adjustable?
+
+--- .class #id
+### Our Loop Model
+
+<img style="max-height:60%" src="rep.png">
+
+Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
+shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
+
+--- .class #id
+### Programming Model
+
+> - Extensible Modern C++ Core
+>
+> - Interpreted Turing-complete Lua scripting front-end.
+>     - Acceptable speed - within factor of 5 of `C` for double precision maths.
+>
+> - Unless modifying the software beyond its design role, most users should never have need to touch the C++.
+>
+> - Extensive documentation and examples for the front-end (See users manual). API reference provided for the core.
+
+--- .class #id
+#### Example
+
+```lua
+function ArcToCMSun(h)
+   -- DegToRad / "perDeg * AstroUnit
+   return math.pi / 180.0 / 3600.0 * 1.49597870e13 * h
+end
+
+function CMSunToArc(h)
+   return h / (math.pi / 180.0 / 3600.0 * 1.49597870e13)
+end
+
+densityScaleHeight = CMSunToArc(130e5);
+kappa = 10
+loopDensity = 10e9
+photDensity = 1.16e17
+
+function BMagnitude(s)
+   if (math.abs(s) > highResRadialPos) then
+      return 600 + ((20 * math.abs(s) - highResRadialPos)
+            / (1- highResRadialPos))^2
+   else
+      return 200 + ((20 * math.abs(s))
+            / highResRadialPos)^2
+   end
+end
+
+function PlasmaDensity(h)
+   if (h < highResHeight) then -- roughly based on Battaglia et al. ApJ 752
+      local nExp = loopDensity + photDensity * math.exp(-h / densityScaleHeight)
+      local nk = photDensity * (1 + h / (kappa * densityScaleHeight))^(-kappa + 1)
+      return nExp + nk
+   else
+      return 1.0e9
+   end
+end
+
+function Temperature(h)
+   if (h < highResHeight) then
+      return 5000 + 5000 * (h / highResHeight)
+   else
+      return 2.0e7
+   end
+end
+
+function NonThermalDensity(s)
+   return 1.0e6
+end
+
+function Delta(s)
+   return 4.0
+end
+
+function EnergyMinMax(s)
+   return 10, 5000
+end
+
+RT.SetViewportSize(25,25)
+RT.AddLoop('l1')
+l1.SetSolarSize(8, 2, 0.2)
+l1.SetSolarLoc(0, 60, 40, 70)
+l1.SetHighRes(2, 2)
+l1.SetDomains(20)
+RT.CullDomains()
+RT.LoadFreqList('logFreqs.csv')
+RT.GUpdate()
+RT.SaveAllCSVs('flare1')
+```
+
+--- .class #id
 ### Interface
 
 <img style="max-height:90%" src="Interface.png">
 
+--- .class #id
+### Interface
+
+> - Previous slide showed interactive interface.
+> - Can also be run with pre-written scripts.
+
+--- .class #id
+
+## Demonstration
 
 --- &twocol
 ## Two columns?
