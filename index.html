@@ -20,22 +20,43 @@
     <div class="slides">
       <section class='' data-state='' id='slide-1'>
   
-  
-</section>
-<section class='class' data-state='' id='id'>
-  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <style type="text/css">
-#percentageSize {
-  width: 100%;
-  height: 100%;
-}
-<style type="text/css">
-#fullSlide {
-  height: 90%;
+#fullImg {
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    max-height: 50%;
 }
 </style>
+
+</section>
+<section class='class' data-state='' id='id'>
+  
+  <!-- <style type="text/css"> -->
+
+<!-- .percentageSize { -->
+
+<!--   width: 100%; -->
+
+<!--   height: 100%; -->
+
+<!-- } -->
+
+<!-- </style> -->
+
+<!-- <style type="text/css"> -->
+
+<!-- .fullSlide { -->
+
+<!--   height: 40%; -->
+
+<!--   width: 40%; -->
+
+<!-- } -->
+
+<!-- </style> -->
 
 <!-- <section style="text-align: left;"> -->
 
@@ -96,14 +117,14 @@ simulation.</li>
 </section>
 <section class='class' data-state='' id='id'>
   <h3>Design: Start with the Desired Output...</h3>
-  <p><img style="max-height:70%" src="noFeet.png"></p>
+  <p><img id="fullImg" src="noFeet.png" /></p>
 
 <p>An emission map plotted in <code>MATLAB</code>.</p>
 
 </section>
 <section class='class' data-state='' id='id'>
   <h3>Design: ...And with Prior Art</h3>
-  <p><img style="max-height:90%" src="Gyro3D.png"></p>
+  <p><img id="fullImg" src="Gyro3D.png" /></p>
 
 <p>Output from PJAS&#39; <code>gyro3d</code> (IDL)</p>
 
@@ -121,10 +142,18 @@ simulation.</li>
 </ul></li>
 </ul>
 
+<!-- <img id="fullSlide" src="rep.png"> -->
+
+<!-- <div id="fullSlide"> -->
+
+<!-- <img src="rep.png"> -->
+
+<!-- </div> -->
+
 </section>
 <section class='class' data-state='' id='id'>
   <h3>Our Loop Model</h3>
-  <p><img style="max-height:60%" src="rep.png"></p>
+  <p><img id="fullImg" src="rep.png" /></p>
 
 <p>Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
 shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
@@ -215,7 +244,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 </section>
 <section class='class' data-state='' id='id'>
   <h3>Interface</h3>
-  <p><img style="max-height:90%" src="Interface.png"></p>
+  <p><img id="fullImg" src="Interface.png" /></p>
 
 </section>
 <section class='class' data-state='' id='id'>
@@ -247,7 +276,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 <div style='float:right;width:48%;'>
   <!-- ![Stuff](../../noFeet.png) -->
 
-<p><img id="percentageSize" src="../../noFeet.png" alt="stuff"></p>
+<p><img id="fullImg" src="../../noFeet.png" alt="stuff" /></p>
 
 <p>This <strong>thing</strong> shows a <em>thing</em></p>
 
@@ -265,7 +294,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 
 <p>Look at equation \eqref{eq:test}; it&#39;s pretty messed up!</p>
 
-<p><img id="percentageSize" src="../../noFeet.png" alt="stuff"></p>
+<p><img id="fullImg" src="../../noFeet.png" alt="stuff" /></p>
 
 <script>
 $('ol.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list

@@ -12,19 +12,32 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
---- .class #id
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <style type="text/css">
-#percentageSize {
-  width: 100%;
-  height: 100%;
-}
-<style type="text/css">
-#fullSlide {
-  height: 90%;
+#fullImg {
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    max-height: 50%;
 }
 </style>
+
+--- .class #id
+
+<!-- <style type="text/css"> -->
+<!-- .percentageSize { -->
+<!--   width: 100%; -->
+<!--   height: 100%; -->
+<!-- } -->
+<!-- </style> -->
+
+
+<!-- <style type="text/css"> -->
+<!-- .fullSlide { -->
+<!--   height: 40%; -->
+<!--   width: 40%; -->
+<!-- } -->
+<!-- </style> -->
 
 <!-- <section style="text-align: left;"> -->
 # Thyr
@@ -63,14 +76,14 @@ knit        : slidify::knit2slides
 --- .class #id
 ### Design: Start with the Desired Output...
 
-<img style="max-height:70%" src="noFeet.png">
+<img id="fullImg" src="noFeet.png" />
 
 An emission map plotted in `MATLAB`.
 
 --- .class #id
 ### Design: ...And with Prior Art
 
-<img style="max-height:90%" src="Gyro3D.png">
+<img id="fullImg" src="Gyro3D.png" />
 
 Output from PJAS' `gyro3d` (IDL)
 
@@ -85,13 +98,22 @@ Output from PJAS' `gyro3d` (IDL)
 >     - This proved harder than expected, provided highly adjustable loop instead.
 >     - How adjustable?
 
+<!-- <img id="fullSlide" src="rep.png"> -->
+<!-- <div id="fullSlide"> -->
+<!-- <img src="rep.png"> -->
+<!-- </div> -->
+
 --- .class #id
 ### Our Loop Model
 
-<img style="max-height:60%" src="rep.png">
+
+<img id="fullImg" src="rep.png" />
 
 Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
 shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
+
+
+
 
 --- .class #id
 ### Programming Model
@@ -178,7 +200,7 @@ RT.SaveAllCSVs('flare1')
 --- .class #id
 ### Interface
 
-<img style="max-height:90%" src="Interface.png">
+<img id="fullImg" src="Interface.png" />
 
 --- .class #id
 ### Interface
@@ -207,7 +229,7 @@ fdfddf
 
 <!-- ![Stuff](../../noFeet.png) -->
 
-<img id="percentageSize" src="../../noFeet.png" alt="stuff">
+<img id="fullImg" src="../../noFeet.png" alt="stuff" />
 
 This **thing** shows a *thing*
 
@@ -226,7 +248,7 @@ This **thing** shows a *thing*
 
 Look at equation \eqref{eq:test}; it's pretty messed up!
 
-<img id="percentageSize" src="../../noFeet.png" alt="stuff">
+<img id="fullImg" src="../../noFeet.png" alt="stuff" />
 
 <script>
 $('ol.incremental li').addClass('fragment')//note to anyone reading this code, you may need to change to ul from ol depending on ordered vs unordered list
