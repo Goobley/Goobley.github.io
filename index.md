@@ -60,24 +60,25 @@ knit        : slidify::knit2slides
 ### Computer Simulation
 
 > - Why now?
+>     - Solve numerically not analytically
 >     - Modern computers are many orders of magnitude more powerful than when Ramaty wrote his original
 >     simulation.
 >     - Can afford to be "profligate" with computational resources (within reason)
 >     - The simulation of $j$ and $k$ is typically less than 50ms per frequency - on this laptop!
 
 ---
-### Design: Start with the Desired Output...
-
-<img id="fullImg" src="noFeet.png" />
-
-An emission map plotted in `MATLAB`.
-
----
-### Design: ...And with Prior Art
+### Design: Start with Previous Developments...
 
 <img id="fullImg" src="Gyro3D.png" />
 
 Output from PJAS' `gyro3d` (IDL)
+
+---
+### Design: ...And the Desired Output
+
+<img id="fullImg" src="noFeet.png" />
+
+An emission map plotted in `MATLAB`.
 
 ---
 ### Main Methods
@@ -95,16 +96,16 @@ Output from PJAS' `gyro3d` (IDL)
 
 <img id="captionedImg" src="rep.png" />
 
-Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
-shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.
+Our modified torus presenting a flare shape with −20$^{\circ}$ lean, at latitude 30$^{\circ}$ and longitude 70$^{\circ}$. The
+shape also presents a 30$^{\circ}$ back angle and 40$^{\circ}$ asymmetry or inclination.
 
 ---
 ### Programming Model
 
-> - Extensible modular modern `C++` core
+> - Extensible modular modern C++ core
 >
-> - Interpreted Turing-complete Lua scripting front-end.
->     - Acceptable speed - within factor of 5 of `C` for double precision maths.
+> - Interpreted full featured Lua scripting front-end.
+>     - Acceptable speed - within factor of 5 of C for double precision maths.
 >
 > - Unless modifying the software beyond its design role, most users should never have need to touch the C++.
 >
@@ -226,7 +227,7 @@ RT.SaveAllCSVs('flare1')
 
 
 ---
-### Current Failings
+### Current Compromises
 
 - Raycasting against large number of domains
     - Currently $O(N^3)$, could be $O(N\log(N))$ using octree sorting.
@@ -237,7 +238,7 @@ RT.SaveAllCSVs('flare1')
     - Time to implement $\sim$1 month. See Quake/Unreal Engine source.
 
 ---
-### Current Failings
+### Current Compromises
 
 - Only single power law electron distribution available in Lua.
     - The back-end is already in place for multi-power law, we just need a way to link the two.
@@ -246,7 +247,7 @@ RT.SaveAllCSVs('flare1')
 ---
 
 <section style="text-align: left;">
-### Current Failings - A comment
+### Current Compromises - A comment
 
 
 The most time-consuming part of the GS simulation is the Bessel function calculations. These are
@@ -258,7 +259,7 @@ Investigation required.
 </section>
 
 ---
-### Possible Future Extensions
+### Further Possibilities
 
 - Other geometry types
     - The algorithms used are applicable to any shape - if it can't be parametrised directly, then we
@@ -274,13 +275,13 @@ The above would require slight modifications of currently hard-coded constants i
 were to be analysed.
 
 ---
-### Possible Future Extensions
+### Further Possibilities
 
 - Allowing the user to define different functions per flare in the multi-loop case.
     - Time to implement: < 4 days
 
 ---
-### Possible Future Extensions
+### Further Possibilities
 
 - Modern raytracing techniques (raymarching)
     - These techniques could massively increase the resolution and complexity of shapes while improving

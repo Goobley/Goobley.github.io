@@ -89,6 +89,7 @@
 <li>Why now?
 
 <ul>
+<li>Solve numerically not analytically</li>
 <li>Modern computers are many orders of magnitude more powerful than when Ramaty wrote his original
 simulation.</li>
 <li>Can afford to be &quot;profligate&quot; with computational resources (within reason)</li>
@@ -98,17 +99,17 @@ simulation.</li>
 
 </section>
 <section class='' data-state='' id='slide-5'>
-  <h3>Design: Start with the Desired Output...</h3>
-  <p><img id="fullImg" src="noFeet.png" /></p>
-
-<p>An emission map plotted in <code>MATLAB</code>.</p>
-
-</section>
-<section class='' data-state='' id='slide-6'>
-  <h3>Design: ...And with Prior Art</h3>
+  <h3>Design: Start with Previous Developments...</h3>
   <p><img id="fullImg" src="Gyro3D.png" /></p>
 
 <p>Output from PJAS&#39; <code>gyro3d</code> (IDL)</p>
+
+</section>
+<section class='' data-state='' id='slide-6'>
+  <h3>Design: ...And the Desired Output</h3>
+  <p><img id="fullImg" src="noFeet.png" /></p>
+
+<p>An emission map plotted in <code>MATLAB</code>.</p>
 
 </section>
 <section class='' data-state='' id='slide-7'>
@@ -129,18 +130,18 @@ simulation.</li>
   <h3>Our Loop Model</h3>
   <p><img id="captionedImg" src="rep.png" /></p>
 
-<p>Our modified torus presenting a flare shape with −20◦ lean, at latitude 30◦ and longitude 70◦. The
-shape also presents a 30◦ back angle and 40◦ asymmetry or inclination.</p>
+<p>Our modified torus presenting a flare shape with −20\(^{\circ}\) lean, at latitude 30\(^{\circ}\) and longitude 70\(^{\circ}\). The
+shape also presents a 30\(^{\circ}\) back angle and 40\(^{\circ}\) asymmetry or inclination.</p>
 
 </section>
 <section class='' data-state='' id='slide-9'>
   <h3>Programming Model</h3>
   <ul class = "build incremental">
-<li><p>Extensible modular modern <code>C++</code> core</p></li>
-<li><p>Interpreted Turing-complete Lua scripting front-end.</p>
+<li><p>Extensible modular modern C++ core</p></li>
+<li><p>Interpreted full featured Lua scripting front-end.</p>
 
 <ul>
-<li>Acceptable speed - within factor of 5 of <code>C</code> for double precision maths.</li>
+<li>Acceptable speed - within factor of 5 of C for double precision maths.</li>
 </ul></li>
 <li><p>Unless modifying the software beyond its design role, most users should never have need to touch the C++.</p></li>
 <li><p>Extensive documentation and examples for the front-end (See users manual). API reference provided for the core.</p></li>
@@ -263,7 +264,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
   
 </section>
 <section class='' data-state='' id='slide-16'>
-  <h3>Current Failings</h3>
+  <h3>Current Compromises</h3>
   <ul>
 <li><p>Raycasting against large number of domains</p>
 
@@ -281,7 +282,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
 
 </section>
 <section class='' data-state='' id='slide-17'>
-  <h3>Current Failings</h3>
+  <h3>Current Compromises</h3>
   <ul>
 <li>Only single power law electron distribution available in Lua.
 
@@ -296,7 +297,7 @@ RT.SaveAllCSVs(&#39;flare1&#39;)
   
   <p><section style="text-align: left;"></p>
 
-<h3>Current Failings - A comment</h3>
+<h3>Current Compromises - A comment</h3>
 
 <p>The most time-consuming part of the GS simulation is the Bessel function calculations. These are
 responsible for peaks in the emission spectrum, however it may be a good idea to use an
@@ -308,7 +309,7 @@ interpolation scheme depending on the precision that is actually required.</p>
 
 </section>
 <section class='' data-state='' id='slide-19'>
-  <h3>Possible Future Extensions</h3>
+  <h3>Further Possibilities</h3>
   <ul>
 <li><p>Other geometry types</p>
 
@@ -331,7 +332,7 @@ were to be analysed.</p>
 
 </section>
 <section class='' data-state='' id='slide-20'>
-  <h3>Possible Future Extensions</h3>
+  <h3>Further Possibilities</h3>
   <ul>
 <li>Allowing the user to define different functions per flare in the multi-loop case.
 
@@ -342,7 +343,7 @@ were to be analysed.</p>
 
 </section>
 <section class='' data-state='' id='slide-21'>
-  <h3>Possible Future Extensions</h3>
+  <h3>Further Possibilities</h3>
   <ul>
 <li>Modern raytracing techniques (raymarching)
 
